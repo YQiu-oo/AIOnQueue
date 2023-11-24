@@ -16,5 +16,4 @@ func (p *Producer) Produce(queue *Queue, messageContent string) {
 	message := Message{Content: messageContent}
 	queue.Enqueue(message)
 	fmt.Println("Produced:", messageContent)
-
 }

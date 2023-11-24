@@ -1,14 +1,11 @@
 package main
 
-import (
-    "net"
-    "net/rpc"
-    "log"
-)
-
-
 type QueueService struct {
-    // ... 其他字段，例如队列实例
+    Queue *Queue
+}
+
+func NewQueueService() *QueueService {
+    return &QueueService{Queue: NewQueue()}
 }
 type EnqueueArgs struct {
     Message string // 或者其他您需要的字段
@@ -27,15 +24,19 @@ type DequeueReply struct {
     Success bool   // 表示操作是否成功
 }
 func (q *QueueService) Enqueue(args *EnqueueArgs, reply *EnqueueReply) error {
-    // 实现入队逻辑
-    return nil
+    message := Message{Content: args.Message} 
+    q.Queue.Enqueue(message)
+    reply.Success = true
+
+	return nil
+    
 }
 
 func (q *QueueService) Dequeue(args *DequeueArgs, reply *DequeueReply) error {
     // 实现出队逻辑
 	message := q.Queue.Dequeue()
-	if message != nil {
-        reply.Message = message.Content
+    if message != nil {
+        reply.Message = message.Content 
         reply.Success = true
     } else {
         reply.Success = false

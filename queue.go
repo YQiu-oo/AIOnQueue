@@ -28,7 +28,7 @@ func (q *Queue) Enqueue(message Message) {
 func (q *Queue) Dequeue() *Message {
 	q.lock.Lock()
 	defer q.lock.Unlock()
-	if len(q.messages) > 0{
+	if len(q.messages) > 0 {
 		message := q.messages[0]
 		q.messages = q.messages[1:]
 		return &message

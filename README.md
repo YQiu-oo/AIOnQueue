@@ -22,3 +22,33 @@ Getting Started
 
 *   Go version 1.15 or higher
 *   \[Optional\] TensorFlow/PyTorch for AI components
+
+
+### Test
+Clone the repository to your local machine:
+
+```
+git clone [repository URL]
+```
+Then, navigate to the project directory:
+
+```
+cd AIONQueue
+```
+Running the RPC Server
+Before running the tests, you need to start the RPC server. This can be done by executing:
+```
+go run .
+```
+Alternatively, you can build the project first and then run the built executable:
+```
+go build
+./AIONQueue
+```
+Running the Tests
+AIONQueue uses Go's standard testing framework for testing. To run the tests, ensure the RPC server is up and running, then execute the following command in the root directory of the project:
+
+```
+go test
+```
+This will execute all the test cases in the project.

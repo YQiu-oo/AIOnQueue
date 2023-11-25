@@ -3,6 +3,7 @@ import (
 	"net"
     "net/rpc"
     "log"
+	"os"
 )
 
 func main() {
@@ -17,16 +18,27 @@ func main() {
 
     // // Consume the messages
     // consumer.Consume(queue)
-    queueService := NewQueueService()
-    rpc.Register(queueService)
+	if len(os.Args) < 2 {
+        log.Fatal("Usage: myapp <config_path>")
+    }
+    configPath := os.Args[1]
 
-	
-	
-    listener, err := net.Listen("tcp", "localhost:1234")
+    // Initialize queue service
+    queueService := NewQueueService(configPath)
+    rpc.Register(queueService)
+    
+    // Load configuration
+    config, err := LoadConfig(configPath)
     if err != nil {
-        log.Fatal("Listen fails", err)
+        log.Fatalf("Failed to load config: %v", err)
     }
 
-    log.Println("RPC server is running...")
+    // Listen for RPC requests on the RPC address
+    listener, err := net.Listen("tcp", config.RPCAddr)
+    if err != nil {
+        log.Fatalf("Listen error: %v", err)
+    }
+
+    log.Printf("RPC server is running on %s...\n", config.RPCAddr)
     rpc.Accept(listener)
 }

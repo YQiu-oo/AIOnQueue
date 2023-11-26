@@ -1,8 +1,0 @@
-{
-    "RAFT_NODE_ID": "node3",
-    "RAFT_LOG_PATH": "D:\\AIOnQueue\\AIOnQueue\\node3\\raft.log",
-    "RAFT_DB_PATH": "D:\\AIOnQueue\\AIOnQueue\\node3\\raft.db",
-    "RAFT_SNAPSHOT_PATH": "D:\\AIOnQueue\\AIOnQueue\\node3\\raft_snapshots",
-    "RAFT_ADDR": "localhost:1003",
-    "RPC_ADDR": "localhost:1236" 
-}
